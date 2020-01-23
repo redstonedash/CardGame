@@ -21,7 +21,7 @@
 *.opendb
 *.ipch
 *.db
-*
+
 *.vcxproj
 *.filters
 *.suo
