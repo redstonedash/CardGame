@@ -7,6 +7,13 @@
 #include "flecs/flecs.hpp"
 #include "raymath.h"
 #include <inttypes.h>
+
+//Models
+Model cardModel;
+
+
+//End
+
 template<typename T> T* addrOf(T&& v) { return &v; }
 #undef ecs_set
 

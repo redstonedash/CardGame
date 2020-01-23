@@ -1,4 +1,3 @@
-#include "BoardDrawModual.h"
 
 void main() {
 	Camera cam = { {0,1,0}, {0,0,0}, {0,0,-1}, CAMERA_ORTHOGRAPHIC };
@@ -8,6 +7,9 @@ void main() {
 #include "UserIoModual.h"
 #include "TimerModual.h"
 #include "CardInitModual.h"
+#include "BoardDrawModual.h"
+
+	cardModel = LoadModel("resources//Card.glb");
 	registerCardSystems();
 	registerInitCardSystems();
 	registerAttackSystem();
