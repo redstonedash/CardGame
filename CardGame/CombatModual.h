@@ -36,7 +36,7 @@ auto registerAttackSystem = [&]() {
 
 ///////////////////////FUNCTIONS///////////////////////
 
-Vec2 FindMe(flecs::entity_t id) {
+auto FindMe = [](flecs::entity_t id) -> Vec2 {
 	int i = 0;
 	int j = 0;
 	for (; id != Board[i][j].id(); j++) {
@@ -46,9 +46,9 @@ Vec2 FindMe(flecs::entity_t id) {
 		}
 	}
 	return { i, j };
-}
+};
 
-TargetInfo TargetsExist(flecs::entity_t id) {
+auto TargetsExist = [](flecs::entity_t id) -> TargetInfo {
 	Vec2 data = FindMe(id);
 	bool isP1, isEdge;
 	TargetInfo returnData = {false, false};
@@ -61,5 +61,4 @@ TargetInfo TargetsExist(flecs::entity_t id) {
 			
 		}
 	}
-
-}
+};
