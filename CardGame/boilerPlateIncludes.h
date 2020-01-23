@@ -39,7 +39,7 @@ struct ActionToken {
 };
 
 struct Timer {
-	float time;
+	int time;
 };
 
 Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int screenHeight)

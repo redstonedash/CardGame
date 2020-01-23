@@ -30,10 +30,4 @@ auto registerTimerSystems = [&]() {
 };
 ////////////////////////ENTITIES////////////////////////
 auto registerTimerEntities = [&]() {
-	flecs::entity gameObject1_e(world, "gameObject1");
-	gameObject1_e.set<Timer>({ 1.0f });
-	flecs::entity gameObject2_e(world, "gameObject2");
-	gameObject2_e.set<Timer>({ 2.0f });
-	flecs::entity gameObject3_e(world, "gameObject3");
-	gameObject3_e.set<Timer>({ 0.5f });
 };
