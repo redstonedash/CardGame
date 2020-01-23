@@ -7,9 +7,9 @@ auto registerDrawCardSystem = [&]() {
 		for (auto row : rows) {
 			Vec2 data = FindMe(rows.entity(row).id());
 			if (data.x == 0) {
-				DrawModel(cardModel, { data.y * 0.001f, 0, .005f }, .001f, RED);
+				DrawModel(cardModel, { data.y * 0.0059f - 0.01315f, 0, .005f }, .001f, RED);
 			} else {
-				DrawModel(cardModel, { data.y * 0.001f, 0, -.005f }, .001f, BLUE);
+				DrawModel(cardModel, { data.y * -0.0059f + 0.01315f, 0, -.005f }, .001f, BLUE);
 			}
 		}
 	});
