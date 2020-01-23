@@ -20,6 +20,15 @@ _declspec(selectany) struct Card {
 	int HP;
 };
 
+_declspec(selectany) struct Side {
+	bool isP1;
+};
+
+_declspec(selectany) struct TargetInfo {
+	bool leftTargetExists;
+	bool rightTargetExists;
+};
+
 
 Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int screenHeight)
 {

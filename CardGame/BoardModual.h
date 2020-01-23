@@ -7,6 +7,7 @@ auto registerCardSystems = [&]() {
 	CardSystem_s.kind(flecs::Manual);
 	CardSystem_s.action([&](flecs::rows rows, flecs::column<Card> card) {
 		for (auto row : rows) {
+
 		}
 	});
 };
