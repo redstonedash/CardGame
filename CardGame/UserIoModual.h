@@ -1,9 +1,8 @@
 ////////////////////////STRUCTS AND STUFF////////////////////////
-struct ActionToken {
-
-};
 struct Card;
 struct Hand;
+struct Player;
+struct TargetInfo;
 ////////////////////////COMPONENTS////////////////////////
 flecs::component<ActionToken> ActionToken_c(world, "ActionToken");
 
@@ -14,8 +13,9 @@ auto registerActionIOSys = [&]() {
 		for (auto row : rows) {
 			Card* card = rows.entity(row).get_ptr<Card>();
 			if (card != nullptr) {
-				//has left or right?
-					//query left or right
+				TargetInfo info = GetTargetInfo(rows.entity(row).)
+				if(  )
+					
 					//check if valid
 				//card performs action
 				//remove token

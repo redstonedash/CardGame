@@ -29,6 +29,9 @@ _declspec(selectany) struct TargetInfo {
 	bool rightTargetExists;
 };
 
+struct ActionToken {
+};
+
 
 Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int screenHeight)
 {
