@@ -3,8 +3,10 @@ void main() {
 	InitWindow(100, 100, "CardGame");
 #include "CombatModual.h"
 #include "BoardModual.h"
+#include "UserIoModual.h"
 	registerCardSystems();
 	registerAttackSystem();
+	registerActionIOSystems();
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(GRAY);
