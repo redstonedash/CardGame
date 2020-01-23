@@ -16,11 +16,11 @@ auto registerTimerSystems = [&]() {
 				min = t[row].time;
 				nextTurn = rows.entity(row);
 			}
-			printf("%" PRId64 ": %f \n", rows.entity(row).id(), t[row].time);
+			//printf("%" PRId64 ": %f \n", rows.entity(row).id(), t[row].time);
 		}
-		printf("END BOARD\n");
-		printf("%" PRId64 " %f \n", nextTurn.id(), min);
-		printf("//////////////////////////");
+		//printf("END BOARD\n");
+		//printf("%" PRId64 " %f \n", nextTurn.id(), min);
+		//printf("//////////////////////////");
 		nextTurn.add<ActionToken>();
 		nextTurn.remove<Timer>();
 		for (auto row : rows) {
