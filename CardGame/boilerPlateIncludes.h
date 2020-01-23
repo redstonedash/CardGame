@@ -23,6 +23,7 @@ _declspec(selectany) struct Card { //all values are base values
 	int HP;
 	int cost;
 	int BAT; //base attack time
+	int summonSickness;
 };
 
 _declspec(selectany) struct Side {

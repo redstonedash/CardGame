@@ -7,7 +7,9 @@ void main() {
 #include "BoardModual.h"
 #include "UserIoModual.h"
 #include "TimerModual.h"
+#include "CardInitModual.h"
 	registerCardSystems();
+	registerInitCardSystems();
 	registerAttackSystem();
 	registerActionIOSystems();
 	registerTimerSystems();
