@@ -13,7 +13,7 @@ auto registerAttackSystem = [&]() {
 	AttackSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<Attack> attack) {
 		for (auto row : rows) {
 			Attack atk = attack[row];
-			if (attack[row].target) {
+			if (atk.target == 0) {
 				//TODO get hp of face
 			}
 			else {
