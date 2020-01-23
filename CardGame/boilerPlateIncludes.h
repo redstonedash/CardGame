@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <cmath>
 #include "raylib.h"
 #include "rlgl.h"
@@ -32,6 +33,9 @@ _declspec(selectany) struct TargetInfo {
 struct ActionToken {
 };
 
+struct Timer {
+	float time;
+};
 
 Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int screenHeight)
 {

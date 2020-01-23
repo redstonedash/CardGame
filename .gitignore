@@ -32,3 +32,5 @@
 *.app
 *.vcxproj
 *.filters
+*.db
+*.opendb

@@ -1,5 +1,5 @@
 ////////////////////////STRUCTS AND VARIABLES////////////////////////
-struct Timer {
+extern struct Timer {
 	float time;
 };
 
@@ -18,7 +18,8 @@ auto registerTimerSystems = [&]() {
 				flecs::entity nextTurn = rows.entity(row);
 			}
 		}
-		nextTurn.add<
+		nextTurn.add<ActionToken>();
+		
 
 	});
 };
