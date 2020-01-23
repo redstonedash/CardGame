@@ -14,7 +14,7 @@ flecs::entity Board[2][5];
 
 ////////////////////////COMPONENTS//////////////////////
 flecs::component<Attack> Attack_c(world, "Attack");
-
+flecs::component<Side> Side_c(world, "Side");
 
 ////////////////////////SYSTEMS////////////////////////
 
