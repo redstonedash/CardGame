@@ -1,6 +1,8 @@
+#include "BoardDrawModual.h"
+
 void main() {
 	Camera cam = { {0,1,0}, {0,0,0}, {0,0,-1}, CAMERA_ORTHOGRAPHIC };
-	InitWindow(100, 100, "CardGame");
+	InitWindow(1280, 720, "CardGame");
 #include "CombatModual.h"
 #include "BoardModual.h"
 #include "UserIoModual.h"
