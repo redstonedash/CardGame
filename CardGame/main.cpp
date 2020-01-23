@@ -4,9 +4,12 @@ void main() {
 #include "CombatModual.h"
 #include "BoardModual.h"
 #include "UserIoModual.h"
+#include "TimerModual.h"
 	registerCardSystems();
 	registerAttackSystem();
 	registerActionIOSystems();
+	registerTimerSystems();
+	registerTimerEntities();
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(GRAY);

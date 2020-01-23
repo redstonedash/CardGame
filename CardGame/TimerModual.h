@@ -8,22 +8,32 @@ flecs::system<Timer> TimerSystem_s(world, "TimerSystem");
 auto registerTimerSystems = [&]() {
 	TimerSystem_s.kind(flecs::Manual);
 	TimerSystem_s.action([&](flecs::rows rows, flecs::column<Timer> t) {
+		
 		float min = -1.0;
 		flecs::entity nextTurn = flecs::entity();
 		for (auto row : rows) {
-			if (min < t[row].time || min<0) {
-				float min = t[row].time;
-				flecs::entity nextTurn = rows.entity(row);
+			if (t[row].time < min || min<0) {
+				min = t[row].time;
+				nextTurn = rows.entity(row);
 			}
+			printf("%" PRId64 ": %f \n", rows.entity(row).id(), t[row].time);
 		}
+		printf("END BOARD\n");
+		printf("%" PRId64 " %f \n", nextTurn.id(), min);
+		printf("//////////////////////////");
 		nextTurn.add<ActionToken>();
+		nextTurn.remove<Timer>();
 		for (auto row : rows) {
 			t[row].time -= min; //advance time based on how much time it takes to finish the next attack, will never result in negatives
 		}
 	});
 };
 ////////////////////////ENTITIES////////////////////////
-auto registerTimerSystems = [&]() {
+auto registerTimerEntities = [&]() {
 	flecs::entity gameObject1_e(world, "gameObject1");
-	gameObject1_e.set<Card>({ 5 });
+	gameObject1_e.set<Timer>({ 1.0f });
+	flecs::entity gameObject2_e(world, "gameObject2");
+	gameObject2_e.set<Timer>({ 2.0f });
+	flecs::entity gameObject3_e(world, "gameObject3");
+	gameObject3_e.set<Timer>({ 0.5f });
 };

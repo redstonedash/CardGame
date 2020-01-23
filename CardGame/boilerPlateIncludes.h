@@ -6,6 +6,7 @@
 #include "flecs.h"
 #include "flecs/flecs.hpp"
 #include "raymath.h"
+#include <inttypes.h>
 template<typename T> T* addrOf(T&& v) { return &v; }
 #undef ecs_set
 
