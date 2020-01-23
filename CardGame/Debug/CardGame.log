@@ -1,10 +1,2 @@
-﻿  main.cpp
-c:\users\s189064\source\repos\cardgamemaster\cardgame\thirdparty\flecs\flecs\flecs.hpp(366): warning C4244: 'argument': conversion from 'uint32_t' to 'float', possible loss of data
-c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\boilerplateincludes.h(21): warning C4091: '__declspec(selectany)': ignored on left of 'Card' when no variable is declared
-c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\boilerplateincludes.h(25): warning C4091: '__declspec(selectany)': ignored on left of 'Side' when no variable is declared
-c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\boilerplateincludes.h(30): warning C4091: '__declspec(selectany)': ignored on left of 'TargetInfo' when no variable is declared
-c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\main.cpp(1): warning C4326: return type of 'main' should be 'int' instead of 'void'
-c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\combatmodual.h(44): error C2601: 'TargetsExist': local function definitions are illegal
-  c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\main.cpp(1): note: this line contains a '{' which has not yet been matched
-c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\combatmodual.h(48): error C2601: 'FindMe': local function definitions are illegal
-  c:\users\s189064\source\repos\cardgamemaster\cardgame\cardgame\main.cpp(1): note: this line contains a '{' which has not yet been matched
+﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  CardGame.vcxproj -> C:\Users\s189064\source\repos\CardGameMaster\CardGame\Debug\CardGame.exe
