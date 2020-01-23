@@ -29,7 +29,7 @@
     <ClInclude Include="CombatModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoardModual.h">
+    <ClInclude Include="UserIoModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

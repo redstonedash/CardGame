@@ -157,10 +157,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoardModual.h" />
     <ClInclude Include="boilerPlateIncludes.h" />
     <ClInclude Include="CombatModual.h" />
     <ClInclude Include="ExternalStructModual.h" />
+    <ClInclude Include="UserIoModual.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
