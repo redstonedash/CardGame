@@ -3,7 +3,6 @@ struct Card;
 struct Hand;
 struct Player;
 struct TargetInfo;
-TargetInfo TargetExists(flecs::entity_t id);
 ////////////////////////COMPONENTS////////////////////////
 flecs::component<ActionToken> ActionToken_c(world, "ActionToken");
 
@@ -35,6 +34,8 @@ auto registerActionIOSystems = [&]() {
 						printf("Invalid Entry");
 					}
 				}
+
+				//remove token
 				rows.entity(row).remove<ActionToken>();
 			}
 			Hand* hand = rows.entity(row).get_ptr<Hand>();
