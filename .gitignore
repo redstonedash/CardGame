@@ -34,3 +34,8 @@
 *.filters
 *.db
 *.opendb
+*.ipch
+*.db
+*
+*.vcxproj
+*.filters

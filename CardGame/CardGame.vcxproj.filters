@@ -32,5 +32,8 @@
     <ClInclude Include="UserIoModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimerModual.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,5 @@
 ////////////////////////STRUCTS AND VARIABLES////////////////////////
-extern struct Timer {
-	float time;
-};
+
 
 ////////////////////////COMPONENTS////////////////////////
 flecs::component<Timer> Timer_c(world, "Timer");
@@ -19,8 +17,9 @@ auto registerTimerSystems = [&]() {
 			}
 		}
 		nextTurn.add<ActionToken>();
-		
-
+		for (auto row : rows) {
+			t[row].time -= min; //advance time based on how much time it takes to finish the next attack, will never result in negatives
+		}
 	});
 };
 ////////////////////////ENTITIES////////////////////////

@@ -160,6 +160,7 @@
     <ClInclude Include="boilerPlateIncludes.h" />
     <ClInclude Include="CombatModual.h" />
     <ClInclude Include="ExternalStructModual.h" />
+    <ClInclude Include="TimerModual.h" />
     <ClInclude Include="UserIoModual.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
