@@ -3,6 +3,7 @@ struct Card;
 struct Hand;
 struct Player;
 struct TargetInfo;
+TargetInfo TargetExists(flecs::entity_t id);
 ////////////////////////COMPONENTS////////////////////////
 flecs::component<ActionToken> ActionToken_c(world, "ActionToken");
 
@@ -13,8 +14,12 @@ auto registerActionIOSys = [&]() {
 		for (auto row : rows) {
 			Card* card = rows.entity(row).get_ptr<Card>();
 			if (card != nullptr) {
-				TargetInfo info = GetTargetInfo(rows.entity(row).)
-				if(  )
+				TargetInfo info = TargetExists(rows.entity(row).id());
+				char target;
+				if (info.leftTargetExists || info.rightTargetExists) {
+					printf("Choose Target: L/R");
+					std::cin >> target;
+				}
 					
 					//check if valid
 				//card performs action
