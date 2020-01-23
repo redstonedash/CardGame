@@ -134,3 +134,12 @@ auto TargetsExist = [&](flecs::entity_t id) -> TargetInfo {
 	}
 	return returnData;
 };
+
+int addCardToBoard(Vec2 v, flecs::entity_t card) {
+	if (Board[v.x][v.y] != 0) {
+		return -1;
+	}
+	else {
+		Board[v.x][v.y] = card;
+	}
+}

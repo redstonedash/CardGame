@@ -9,13 +9,21 @@ flecs::component<Health> Health_c(world, "Health");
 
 flecs::system<Card, Attack> AttackSystem_s(world, "AttackSystem");
 auto registerAttackSystem = [&]() {
-	AttackSystem_s.kind(flecs::Manual);
+	AttackSystem_s.kind(flecs::PostUpdate);
 	AttackSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<Attack> attack) {
 		for (auto row : rows) {
-			Health * hlth = flecs::entity(world, attack[row].target).get_ptr<Health>();
-			hlth->health -= attack[row].damage;
-			rows.entity(row).remove<Attack>();
-			rows.entity(row).set<Timer>({ (float) card->BAT });
+			Attack atk = attack[row];
+			if (attack[row].target) {
+				//TODO get hp of face
+			}
+			else {
+				Health * hlth = flecs::entity(world, attack[row].target).get_ptr<Health>();
+				printf("%d -> ", hlth->health);
+				hlth->health -= attack[row].damage;
+				printf("%d\n", hlth->health); //warning these are pointers and they might die when we do stuff with flecs
+				rows.entity(row).remove<Attack>();
+				rows.entity(row).set<Timer>({ (float)card->BAT });
+			}
 		}
 	});
 	//AttackSystem_s.run(0, buf);

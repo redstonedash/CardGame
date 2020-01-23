@@ -11,7 +11,13 @@ void main() {
 	registerAttackSystem();
 	registerActionIOSystems();
 	registerTimerSystems();
-	registerTimerEntities();
+	flecs::entity card1(world, "card1");
+	card1.add<ActionToken>();
+	card1.set<Card>({ 1, 2, 3, 4 });
+	flecs::entity card2(world, "card2");
+	card2.set<Card>({ 5, 6, 7, 8 });
+	addCardToBoard({ 0,0 }, card1.id());
+	addCardToBoard({ 1,4 }, card2.id());
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(GRAY);
