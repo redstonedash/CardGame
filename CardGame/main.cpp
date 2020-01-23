@@ -13,6 +13,7 @@ void main() {
 	registerAttackSystem();
 	registerActionIOSystems();
 	registerTimerSystems();
+	registerDrawCardSystem();
 	flecs::entity card1(world, "card1");
 	card1.add<ActionToken>();
 	card1.set<Card>({ 1, 2, 3, 4 });

@@ -22,7 +22,7 @@ auto registerAttackSystem = [&]() {
 				hlth->health -= attack[row].damage;
 				printf("%d\n", hlth->health); //warning these are pointers and they might die when we do stuff with flecs
 				rows.entity(row).remove<Attack>();
-				rows.entity(row).set<Timer>({ (float)card->BAT });
+				rows.entity(row).set<Timer>({ card->BAT });
 			}
 		}
 	});
