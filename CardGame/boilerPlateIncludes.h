@@ -16,6 +16,11 @@ template<typename T> T* addrOf(T&& v) { return &v; }
 
 _declspec(selectany) flecs::world world = flecs::world();
 
+_declspec(selectany) struct Card {
+	int HP;
+};
+
+
 Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int screenHeight)
 {
 	// Calculate projection matrix (from perspective instead of frustum
