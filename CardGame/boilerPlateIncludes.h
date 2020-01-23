@@ -18,8 +18,11 @@ template<typename T> T* addrOf(T&& v) { return &v; }
 
 _declspec(selectany) flecs::world world = flecs::world();
 
-_declspec(selectany) struct Card {
+_declspec(selectany) struct Card { //all values are base values
+	int damage;
 	int HP;
+	int cost;
+	int BAT; //base attack time
 };
 
 _declspec(selectany) struct Side {
@@ -27,8 +30,8 @@ _declspec(selectany) struct Side {
 };
 
 _declspec(selectany) struct TargetInfo {
-	bool leftTargetExists;
-	bool rightTargetExists;
+	flecs::entity_t leftTarget;
+	flecs::entity_t rightTarget;
 };
 
 struct ActionToken {
@@ -78,3 +81,56 @@ Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int 
 
 	return screenPosition;
 }
+
+struct Health {
+	int health;
+};
+
+struct Attack {
+	flecs::entity_t target;
+	int damage;
+};
+
+struct Vec2 {
+	int x;
+	int y;
+};
+
+flecs::entity HandP1[10];
+flecs::entity HandP2[10];
+flecs::entity_t Board[2][5];
+
+auto FindMe = [&](flecs::entity_t id) -> Vec2 {
+	int i = 0;
+	int j = 0;
+	for (; id != Board[i][j]; j++) {
+		if (j >= 5) {
+			j = 0;
+			i = 1;
+		}
+	}
+	return { i, j };
+};
+
+auto TargetsExist = [&](flecs::entity_t id) -> TargetInfo {
+	Vec2 data = FindMe(id);
+	bool isP1, isEdge;
+	TargetInfo returnData = { 0, 0 };
+
+	if (data.x == 0) isP1 = true;
+	if (data.y == 0) isEdge = true;
+
+	if (isP1) {
+		if (!isEdge) {
+			if (Board[1][5 - data.y] != 0) returnData.leftTarget = Board[1][5 - data.y];
+		}
+		if (Board[1][5 - data.y - 1] != 0) returnData.rightTarget = Board[1][5 - data.y - 1];
+	}
+	else {
+		if (!isEdge) {
+			if (Board[0][5 - data.y] != 0) returnData.leftTarget = Board[0][5 - data.y];
+		}
+		if (Board[0][5 - data.y - 1] != 0) returnData.rightTarget = Board[0][5 - data.y - 1];
+	}
+	return returnData;
+};

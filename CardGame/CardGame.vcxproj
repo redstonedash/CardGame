@@ -159,7 +159,6 @@
   <ItemGroup>
     <ClInclude Include="boilerPlateIncludes.h" />
     <ClInclude Include="CombatModual.h" />
-    <ClInclude Include="CombatModual.hpp" />
     <ClInclude Include="ExternalStructModual.h" />
     <ClInclude Include="TimerModual.h" />
     <ClInclude Include="UserIoModual.h" />
