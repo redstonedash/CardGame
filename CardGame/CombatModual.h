@@ -18,6 +18,9 @@ auto registerAttackSystem = [&]() {
 	DieSystem_s.kind(flecs::OnRemove);//TO CARTER IMPLIMENT THIS SYSTEM, IT DO THIS ecs_delete(world.c_ptr(), ((ecs_entity_t)flecs::entity(world, attack[row].target).id()));
 	AttackSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<Attack> attack) {
 		for (auto row : rows) {
+			if (row != 0) {
+				printf("why");
+			}
 			Attack atk = attack[row];
 			if (atk.target == 0) {
 				Health * hlth = Face_e.get_ptr<Health>();

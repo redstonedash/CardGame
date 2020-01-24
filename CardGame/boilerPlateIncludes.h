@@ -139,16 +139,16 @@ auto TargetsExist = [&](flecs::entity_t id) -> TargetInfo {
 	if (data.y == 0) isEdge = true;
 
 	if (isP1) {
-		if (!isEdge) {
-			if (Board[1][5 - data.y] != 0) returnData.leftTarget = Board[1][5 - data.y];
+		if (isEdge) {
+			returnData.leftTarget = 0;
 		}
-		if (Board[1][5 - data.y - 1] != 0) returnData.rightTarget = Board[1][5 - data.y - 1];
+		returnData.rightTarget = Board[1][5 - data.y - 1];
 	}
 	else {
-		if (!isEdge) {
-			if (Board[0][5 - data.y] != 0) returnData.rightTarget = Board[0][5 - data.y];
+		if (isEdge) {
+			returnData.rightTarget = 0;
 		}
-		if (Board[0][5 - data.y - 1] != 0) returnData.leftTarget = Board[0][5 - data.y - 1];
+		returnData.leftTarget = Board[0][5 - data.y - 1];
 	}
 	return returnData;
 };

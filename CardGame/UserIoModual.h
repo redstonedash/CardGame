@@ -7,6 +7,7 @@ flecs::component<ActionToken> ActionToken_c(world, "ActionToken");
 ////////////////////////SYSTEMS////////////////////////
 flecs::system<ActionToken, Card> ActionIO_s(world, "ActionIOSystem");
 auto registerActionIOSystems = [&]() {
+	ActionIO_s.signature("!Attack");
 	ActionIO_s.action([&](flecs::rows rows, flecs::column<ActionToken> token, flecs::column<Card> card) {
 		for (auto row : rows) {
 			

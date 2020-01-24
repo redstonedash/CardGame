@@ -70,7 +70,12 @@ void main() {
 		world.progress(0);
 		EndMode3D();
 		DrawCardInfoSystem_s.run();
-		flecs::entity(world, gameJamMoment).remove<Attack>().remove<ActionToken>();
+		bool a = false;
+		if (flecs::entity(world, gameJamMoment).get_ptr<ActionToken>())
+		{
+			flecs::entity(world, gameJamMoment).remove<Attack>().remove<ActionToken>();
+			TimerSystem_s.run();
+		}
 		EndDrawing();
 	}
 }
