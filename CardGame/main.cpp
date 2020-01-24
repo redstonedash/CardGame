@@ -59,10 +59,8 @@ void main() {
 		BeginMode3D(cam);
 		world.progress(0);
 		EndMode3D();
-		//BeginMode2D(cam);
 		DrawCardInfoSystem_s.run();
 		flecs::entity(world, gameJamMoment).remove<Attack>().remove<ActionToken>();
-		//EndMode2D();
 		EndDrawing();
 	}
 }
