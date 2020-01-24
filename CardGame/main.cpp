@@ -1,7 +1,7 @@
 
 void main() {
 	Camera cam = { {0,1,0}, {0,0,0}, {0,0,-1}, 10, CAMERA_ORTHOGRAPHIC };
-	InitWindow(1280, 720, "CardGame");
+	InitWindow(1280, 720, "Armageddon");
 	world.set_target_fps(60);
 	SetTargetFPS(60);
 #include "CombatModual.h"
