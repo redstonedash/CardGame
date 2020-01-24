@@ -10,7 +10,6 @@ void main() {
 #include "BoardDrawModual.h"
 
 	cardModel = LoadModel("resources//Card.glb");
-	renderTexture = LoadRenderTexture(1080, 1080);
 
 	registerCardSystems();
 	registerInitCardSystems();
