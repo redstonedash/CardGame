@@ -58,15 +58,3 @@ auto registerCardSystems = [&] {
 	});
 };
 //////////////////////////ENTITIES//////////////////////////
-auto registerCardEntities = [&] {
-	auto testCard_e = flecs::entity(world);
-	testCard_e.add<Card>();
-	testCard_e.set<Model>(cardTemplate);
-	Model* m = testCard_e.get_ptr<Model>();
-	*m = cardTemplate;
-	LoadCardTextures("hyena", *m);
-	Card * c = testCard_e.get_ptr<Card>();
-	c->thickness = 0.05f;
-
-	//c->textures[0].texture =
-};
