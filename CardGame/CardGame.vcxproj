@@ -165,6 +165,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioModual.h" />
     <ClInclude Include="BoardDrawModual.h" />
     <ClInclude Include="boilerPlateIncludes.h" />
     <ClInclude Include="CardInitModual.h" />
