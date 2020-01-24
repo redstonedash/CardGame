@@ -27,7 +27,7 @@ auto registerAttackSystem = [&]() {
 				printf("ATTACKING FACE %d -> ", hlth->health);
 				hlth->health -= attack[row].damage;
 				if (hlth->health <= 0) {
-					WinGameJam();
+					//WinGameJam();
 				}
 			}
 			else {
