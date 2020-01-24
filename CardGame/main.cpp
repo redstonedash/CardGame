@@ -13,6 +13,7 @@ void main() {
 	initParalax();
 	cardModel = LoadModel("resources/Card.glb");
 	registerDrawCardSystem();
+	registerHighlightActionSystem();
 	registerInitCardSystems();
 	registerAttackSystem();
 	registerActionIOSystems();
