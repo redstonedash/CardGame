@@ -16,15 +16,8 @@ auto LoadCardTextures = [&](const char* cardName, Model& model) {
 	temp.clear();
 	cardTextures[1] = LoadTexture(temp.append(prefix).append(filePath).append("Albedo.png").c_str());
 	temp.clear();
-	cardTextures[2] = LoadTexture(temp.append(prefix).append(filePath).append("Emmision.png").c_str());
+	cardTextures[2] = LoadTexture(temp.append(prefix).append(filePath).append("Layer.png").c_str());
 	temp.clear();
-	cardTextures[3] = LoadTexture(temp.append(prefix).append(filePath).append("Layer.png").c_str());
-	SetShaderValueTexture(parallaxBG, GetShaderLocation(parallaxBG, "t3"), cardTextures[0]);
-	SetShaderValueTexture(parallaxFG, GetShaderLocation(parallaxFG, "t3"), cardTextures[0]);
-	temp.clear();
-	cardTextures[4] = LoadTexture(temp.append(prefix).append(filePath).append("Normal.png").c_str());
-	SetShaderValueTexture(parallaxBG, GetShaderLocation(parallaxBG, "t4"), cardTextures[4]);
-	SetShaderValueTexture(parallaxFG, GetShaderLocation(parallaxFG, "t4"), cardTextures[4]);
 	model.materials[0].shader = parallaxBG;
 	model.materials[2].shader = parallaxFG;
 	for (int i = 0; i < 5; i++) {
@@ -34,8 +27,10 @@ auto LoadCardTextures = [&](const char* cardName, Model& model) {
 	//TODO add thickness	
 };
 //////////////////////////VARIABLES & STRUCTS//////////////////////////
-struct Card {
+struct CardModel {
 	float thickness; //the scale that the heighmap should be scaled by
+	Material foreground;
+	Material background;
 };
 //shader
 

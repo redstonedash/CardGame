@@ -28,21 +28,19 @@ auto registerActionIOSystems = [&]() {
 					if (target == 0 || target == 'l' || target == 'L' || target == 'r' || target == 'R') {
 						//add attack
 						rows.entity(row).set<Attack>({ (target == 'r' || target == 'R') ? (info.rightTarget) : (info.leftTarget), card->damage});
-						AttackSystem_s.run();
+						//AttackSystem_s.run();
 						oktogo = true; //why not just break?
 					}
 					else {
 						printf("Invalid Entry");
 					}
 				}
-				
-				//remove token
-				rows.entity(row).remove<ActionToken>();
 			}
-			//Hand* hand = rows.entity(row).get_ptr<Hand>();
-			//if (hand != nullptr) {
-			//	//player hand actions
-			//}
+		
+		//Hand* hand = rows.entity(row).get_ptr<Hand>();
+		//if (hand != nullptr) {
+		//	//player hand actions
+		//}
 	});
 };
 

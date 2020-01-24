@@ -9,7 +9,7 @@ flecs::component<Health> Health_c(world, "Health");
 
 flecs::system<Card, Attack> AttackSystem_s(world, "AttackSystem");
 auto registerAttackSystem = [&]() {
-	AttackSystem_s.kind(flecs::Manual);
+	AttackSystem_s.kind(flecs::PostUpdate);
 	AttackSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<Attack> attack) {
 		for (auto row : rows) {
 			Attack atk = attack[row];
