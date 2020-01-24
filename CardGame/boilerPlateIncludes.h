@@ -192,6 +192,10 @@ void initParalax() {
 	scaleLocFG = GetShaderLocation(parallaxFG, "scale");
 }
 
+void WinGameJam() {
+	DrawCube({ 0, 0, 0 }, 100, 1, 100, BLUE);
+}
+
 CardVisuals LoadCardVisuals(const char* cardName) {
 	CardVisuals card = {};
 	std::string filePath(cardName);
