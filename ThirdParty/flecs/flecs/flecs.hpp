@@ -266,6 +266,7 @@ public:
         return get_field<T>(column, row);
     }
 
+private:
     /* Get column, check if correct type is used */
     template <typename T>
     flecs::column<T> get_column(uint32_t column_id) const {
