@@ -12,6 +12,8 @@
 //Models
 Model cardModel;
 
+//Images
+Texture vignette;
 
 //End
 

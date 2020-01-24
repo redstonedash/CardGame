@@ -25,6 +25,9 @@ void main() {
 	FireGolemAssets.thickness = 0.05f;
 	StoneGolemAssets.thickness = 0.05f;
 
+	vignette = LoadTexture("resources/vignette.png");
+
+
 	flecs::entity card1(world, "card1");
 	card1.set<Card>({ 1, 2, 3, 4 }).set(HyenaAssets);
 	//card1.add<ActionToken>(); //somone needs it 2:01
@@ -61,6 +64,7 @@ void main() {
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(GRAY);
+		DrawTexture(vignette, 0, 0, WHITE);
 		BeginMode3D(cam);
 		world.progress(0);
 		EndMode3D();
