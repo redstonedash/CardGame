@@ -6,8 +6,6 @@ flecs::component<Side> Side_c(world, "Side");
 flecs::component<Health> Health_c(world, "Health");
 ////////////////////////ENTITIES////////////////////////
 
-flecs::entity Face_e(world, "Face");
-Face_e.set<Health>({ 30 });
 
 ////////////////////////SYSTEMS////////////////////////
 
@@ -23,12 +21,12 @@ auto registerAttackSystem = [&]() {
 			}
 			Attack atk = attack[row];
 			if (atk.target == 0) {
-				Health * hlth = Face_e.get_ptr<Health>();
-				printf("ATTACKING FACE %d -> ", hlth->health);
-				hlth->health -= attack[row].damage;
-				if (hlth->health <= 0) {
-					//WinGameJam();
-				}
+				//Health * hlth = Face_e.get_ptr<Health>();
+				//printf("ATTACKING FACE %d -> ", hlth->health);
+				//hlth->health -= attack[row].damage;
+				////if (hlth->health <= 0) {
+				////	//WinGameJam();
+				////}
 			}
 			else {
 				Health * hlth = flecs::entity(world, attack[row].target).get_ptr<Health>();
