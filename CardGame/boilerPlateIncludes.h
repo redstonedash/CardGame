@@ -15,6 +15,9 @@ Model cardModel;
 //Images
 Texture vignette;
 
+//Sounds
+Music music;
+
 //End
 
 template<typename T> T* addrOf(T&& v) { return &v; }
