@@ -6,9 +6,7 @@ in vec3 worldPosition;
 
 uniform sampler2D texture0; //albedo
 uniform sampler2D texture1; //depth
-uniform sampler2D texture2; //emmision
-uniform sampler2D t3; //layer
-uniform sampler2D t4; //normal
+uniform sampler2D texture2; //layer
 uniform vec3 model; //position of center of card    
 uniform float thickness;
 uniform float scale;
@@ -30,14 +28,14 @@ void main(){
     for(int i = stepAmmount; i >= 0; i--){
         vec2 tempPos = getTexturePosition(mix(worldPosition, rayPos, float(i)/float(stepAmmount)).xz);
         float rayHeight = mix(worldPosition, rayPos, float(i)/float(stepAmmount)).y/actualThickness;
-        if( rayHeight <= texture(texture1, tempPos).x && !(tempPos.x >= 1 || tempPos.x<=0 || tempPos.y<=0 || tempPos.y>=1) && (texture(texture1, tempPos).x-rayHeight)<0.2){
+        if( rayHeight <= texture(texture0, tempPos).x && !(tempPos.x >= 1 || tempPos.x<=0 || tempPos.y<=0 || tempPos.y>=1) && (texture(texture0, tempPos).x-rayHeight)<0.2){
             hitPos = tempPos;
             break;
         }
     }
-    if((hitPos.x >= 1 || hitPos.x<=0 || hitPos.y<=0 || hitPos.y>=1) || texture(t3,hitPos).x<0.5)
+    if((hitPos.x >= 1 || hitPos.x<=0 || hitPos.y<=0 || hitPos.y>=1) || texture(texture2,hitPos).x<0.5)
     {
        discard;
     }
-    finalColor = vec4(texture(texture2,hitPos).xyz, 1);
+    finalColor = vec4(texture(texture1,hitPos).xyz, 1);
 }

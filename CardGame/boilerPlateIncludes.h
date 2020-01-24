@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <cmath>
+#include <string>
 #include "raylib.h"
 #include "rlgl.h"
 #include "flecs.h"
@@ -152,3 +153,53 @@ int addCardToBoard(Vec2 v, flecs::entity_t card) {
 		Board[v.x][v.y] = card;
 	}
 }
+struct CardVisuals {
+	float thickness; //the scale that the heighmap should be scaled by
+	Material foreground;
+	Material background;
+};
+
+Shader parallaxBG	;
+Shader parallaxFG	;
+int modelLocBG		;
+int modelLocFG		;
+int thicknessLocBG	;
+int thicknessLocFG  ;
+int scaleLocBG		;
+int scaleLocFG		;
+
+void initParalax() {
+	parallaxBG = LoadShader("resources/parallax.vert", "resources/parallaxBG.frag");
+	parallaxFG = LoadShader("resources/parallax.vert", "resources/parallaxFG.frag");
+	modelLocBG = GetShaderLocation(parallaxBG, "model");
+	modelLocFG = GetShaderLocation(parallaxFG, "model");
+	thicknessLocBG = GetShaderLocation(parallaxBG, "thickness");
+	thicknessLocFG = GetShaderLocation(parallaxFG, "thickness");
+	scaleLocBG = GetShaderLocation(parallaxBG, "scale");
+	scaleLocFG = GetShaderLocation(parallaxFG, "scale");
+}
+
+CardVisuals LoadCardVisuals(const char* cardName) {
+	CardVisuals card = {};
+	std::string filePath(cardName);
+	std::string prefix("resources/");
+	std::string temp = std::string();
+	Texture cardTextures[3];
+	cardTextures[0] = LoadTexture(temp.append(prefix).append(filePath).append("Depth.png").c_str());
+	temp.clear();
+	cardTextures[1] = LoadTexture(temp.append(prefix).append(filePath).append("Albedo.png").c_str());
+	temp.clear();
+	cardTextures[2] = LoadTexture(temp.append(prefix).append(filePath).append("Layer.png").c_str());
+	temp.clear();
+	card.background = LoadMaterialDefault();
+	card.foreground = LoadMaterialDefault();
+	card.background.shader = parallaxBG;
+	card.foreground.shader = parallaxFG;
+	
+	for (int i = 0; i < 3; i++) {
+		card.foreground.maps[i].texture = cardTextures[i];
+		card.background.maps[i].texture = cardTextures[i];
+	}
+	return card;
+	//TODO add thickness	
+};

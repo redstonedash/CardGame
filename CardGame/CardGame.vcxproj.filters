@@ -41,8 +41,5 @@
     <ClInclude Include="CardInitModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CardModual.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

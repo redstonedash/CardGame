@@ -22,6 +22,7 @@ auto registerAttackSystem = [&]() {
 				hlth->health -= attack[row].damage;
 				printf("%d\n", hlth->health); //warning these are pointers and they might die when we do stuff with flecs
 				rows.entity(row).remove<Attack>();
+				rows.entity(row).remove<ActionToken>(); //1:59 just keeping track of time, that way tommarow i can just look at the latest stuff and it will probably need review first
 				rows.entity(row).set<Timer>({ card->BAT });
 			}
 		}
