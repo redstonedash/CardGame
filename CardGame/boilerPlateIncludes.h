@@ -124,7 +124,7 @@ auto FindMe = [&](flecs::entity_t id) -> Vec2 {
 
 auto TargetsExist = [&](flecs::entity_t id) -> TargetInfo {
 	Vec2 data = FindMe(id);
-	bool isP1, isEdge;
+	bool isP1 = false, isEdge = false;
 	TargetInfo returnData = { 0, 0 };
 
 	if (data.x == 0) isP1 = true;
@@ -167,6 +167,8 @@ int thicknessLocBG	;
 int thicknessLocFG  ;
 int scaleLocBG		;
 int scaleLocFG		;
+
+flecs::entity_t gameJamMoment;
 
 void initParalax() {
 	parallaxBG = LoadShader("resources/parallax.vert", "resources/parallaxBG.frag");

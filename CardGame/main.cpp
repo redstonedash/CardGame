@@ -17,7 +17,7 @@ void main() {
 	registerActionIOSystems();
 	registerTimerSystems();
 	
-	auto HyenaAssets = LoadCardVisuals("hyena");
+	CardVisuals HyenaAssets = LoadCardVisuals("hyena");
 	HyenaAssets.thickness = 0.05f;
 
 	flecs::entity card1(world, "card1");
@@ -56,6 +56,7 @@ void main() {
 		EndMode3D();
 		//BeginMode2D(cam);
 		DrawCardInfoSystem_s.run();
+		flecs::entity(world, gameJamMoment).remove<Attack>().remove<ActionToken>();
 		//EndMode2D();
 		EndDrawing();
 	}

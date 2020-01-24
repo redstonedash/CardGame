@@ -14,16 +14,17 @@ auto registerAttackSystem = [&]() {
 		for (auto row : rows) {
 			Attack atk = attack[row];
 			if (atk.target == 0) {
-				//TODO get hp of face
+				//TODO get hp of face, we don't have a face yet
 			}
 			else {
 				Health * hlth = flecs::entity(world, attack[row].target).get_ptr<Health>();
 				printf("%d -> ", hlth->health);
 				hlth->health -= attack[row].damage;
 				printf("%d\n", hlth->health); //warning these are pointers and they might die when we do stuff with flecs
-				rows.entity(row).remove<Attack>();
-				rows.entity(row).remove<ActionToken>(); //1:59 just keeping track of time, that way tommarow i can just look at the latest stuff and it will probably need review first
-				rows.entity(row).set<Timer>({ card->BAT });
+				//rows.entity(row).remove<Attack>(); game jam moment
+				//rows.entity(row).remove<ActionToken>(); //1:59 just keeping track of time, that way tommarow i can just look at the latest stuff and it will probably need review first
+				gameJamMoment = rows.entity(row).id();
+				rows.entity(row).set<Timer>({ card[row].BAT });
 			}
 		}
 	});
