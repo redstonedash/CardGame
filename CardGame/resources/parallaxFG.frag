@@ -33,7 +33,7 @@ void main(){
             break;
         }
     }
-    if((hitPos.x >= 1 || hitPos.x<=0 || hitPos.y<=0 || hitPos.y>=1) || texture(texture2,hitPos).x<0.5)
+    if((hitPos.x >= 1 || hitPos.x<=0 || hitPos.y<=0 || hitPos.y>=1) || texture(texture2,hitPos).w<0.5)
     {
        discard;
     }
