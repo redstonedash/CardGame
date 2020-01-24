@@ -10,6 +10,8 @@ void main() {
 #include "BoardDrawModual.h"
 
 	cardModel = LoadModel("resources//Card.glb");
+	renderTexture = LoadRenderTexture(1080, 1080);
+
 	registerCardSystems();
 	registerInitCardSystems();
 	registerAttackSystem();
@@ -52,6 +54,7 @@ void main() {
 		BeginMode3D(cam);
 		world.progress(0);
 		EndMode3D();
+		//call 2d draw stuff
 		EndDrawing();
 	}
 }
