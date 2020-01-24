@@ -26,12 +26,12 @@ auto registerDrawCardSystem = [&]() {
 			float scale = 3;
 			SetShaderValue(parallaxBG, modelLocBG, &v, UNIFORM_VEC3);
 			SetShaderValue(parallaxBG, scaleLocBG, &scale, UNIFORM_FLOAT);
-			SetShaderValue(parallaxBG, thicknessLocBG, &(cv->thickness), UNIFORM_FLOAT);
+			SetShaderValue(parallaxBG, thicknessLocBG, &(cv[row].thickness), UNIFORM_FLOAT);
 			SetShaderValue(parallaxFG, modelLocFG, &v, UNIFORM_VEC3);
 			SetShaderValue(parallaxFG, scaleLocFG, &scale, UNIFORM_FLOAT);
-			SetShaderValue(parallaxFG, thicknessLocFG, &(cv->thickness), UNIFORM_FLOAT);
-			cardModel.materials[0] = cv->background;
-			cardModel.materials[2] = cv->foreground;
+			SetShaderValue(parallaxFG, thicknessLocFG, &(cv[row].thickness), UNIFORM_FLOAT);
+			cardModel.materials[0] = cv[row].background;
+			cardModel.materials[2] = cv[row].foreground;
 			DrawModel(cardModel, v, 1, WHITE);
 		}
 	});
