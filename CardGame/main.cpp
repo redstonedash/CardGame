@@ -2,6 +2,7 @@
 void main() {
 	Camera cam = { {0,1,0}, {0,0,0}, {0,0,-1}, CAMERA_ORTHOGRAPHIC };
 	InitWindow(1280, 720, "CardGame");
+	world.set_target_fps(60);
 #include "CombatModual.h"
 #include "BoardModual.h"
 #include "UserIoModual.h"
@@ -17,6 +18,7 @@ void main() {
 	registerActionIOSystems();
 	registerTimerSystems();
 	registerDrawCardSystem();
+	registerDrawCardInfoSystem();
 	flecs::entity card1(world, "card1");
 	card1.set<Card>({ 1, 2, 3, 4 });
 	flecs::entity card2(world, "card2");
@@ -29,8 +31,6 @@ void main() {
 	card5.set<Card>({ 5, 6, 7, 8 });
 	flecs::entity card6(world, "card6");
 	card6.set<Card>({ 1, 2, 3, 4 });
-	flecs::entity card7(world, "card7");
-	card7.set<Card>({ 5, 6, 7, 8 });
 	flecs::entity card8(world, "card8");
 	card8.set<Card>({ 5, 6, 7, 8 });
 	flecs::entity card9(world, "card9");
@@ -43,7 +43,6 @@ void main() {
 	addCardToBoard({ 0,3 }, card4.id());
 	addCardToBoard({ 0,4 }, card5.id());
 	addCardToBoard({ 1,0 }, card6.id());
-	addCardToBoard({ 1,1 }, card7.id());
 	addCardToBoard({ 1,2 }, card8.id());
 	addCardToBoard({ 1,3 }, card9.id());
 	addCardToBoard({ 1,4 }, card10.id());
@@ -53,7 +52,9 @@ void main() {
 		BeginMode3D(cam);
 		world.progress(0);
 		EndMode3D();
-		//call 2d draw stuff
+		//BeginMode2D(cam);
+		DrawCardInfoSystem_s.run();
+		//EndMode2D();
 		EndDrawing();
 	}
 }
