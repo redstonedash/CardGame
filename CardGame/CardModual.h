@@ -27,7 +27,7 @@ auto LoadCardTextures = [&](const char* cardName, Model& model) {
 	//TODO add thickness	
 };
 //////////////////////////VARIABLES & STRUCTS//////////////////////////
-struct CardModel {
+struct CardVisuals {
 	float thickness; //the scale that the heighmap should be scaled by
 	Material foreground;
 	Material background;
@@ -39,10 +39,10 @@ Model cardTemplate = LoadModel("resources/Card.glb");
 Texture hyenaTexture[5];
 
 //////////////////////////COMPONENTS//////////////////////////
-flecs::component<Card> Card_c(world, "Card");
+flecs::component<CardVisuals> CardModel_c(world, "Card");
 //////////////////////////SYSTEMS//////////////////////////
 auto registerCardSystems = [&] {
-	flecs::system<Card>(world, "DrawParallaxObjects").kind(flecs::	PostUpdate).action([&](flecs::rows rows, flecs::column<Card> card) {
+	flecs::system<CardVisuals>(world, "DrawParallaxObjects").kind(flecs::PostUpdate).action([&](flecs::rows rows, flecs::column<Card> card) {
 		for (auto row : rows) {
 			Ray r = GetMouseRay(GetMousePosition(), cam);
 			Vector3 v = { r.position.x,0,r.position.z };
@@ -53,7 +53,7 @@ auto registerCardSystems = [&] {
 			SetShaderValue(parallaxFG, modelLocFG, &v, UNIFORM_VEC3);
 			SetShaderValue(parallaxFG, scaleLocFG, &scale, UNIFORM_FLOAT);
 			SetShaderValue(parallaxFG, thicknessLocFG, &(card[row].thickness), UNIFORM_FLOAT);
-			DrawModel(cardTemplate, { r.position.x,0,r.position.z }, 2, WHITE);
+			DrawModel(cardModel, { r.position.x,0,r.position.z }, 2, WHITE);
 		}
 	});
 };

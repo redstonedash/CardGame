@@ -26,6 +26,7 @@ template<typename T> T* addrOf(T&& v) { return &v; }
 _declspec(selectany) flecs::world world = flecs::world();
 
 _declspec(selectany) struct Card { //all values are base values
+	const char* name; 
 	int damage;
 	int HP;
 	int cost;
