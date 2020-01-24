@@ -112,6 +112,9 @@ flecs::entity HandP2[10];
 flecs::entity_t Board[2][5];
 
 auto FindMe = [&](flecs::entity_t id) -> Vec2 {
+	if (id == 0) {
+		return { -1, -1 };
+	}
 	int i = 0;
 	int j = 0;
 	while (id != Board[i][j]) {
@@ -126,6 +129,9 @@ auto FindMe = [&](flecs::entity_t id) -> Vec2 {
 
 auto TargetsExist = [&](flecs::entity_t id) -> TargetInfo {
 	Vec2 data = FindMe(id);
+	if (data.x == -1 && data.y == -1) {
+		return { 0, 0 };
+	}
 	bool isP1 = false, isEdge = false;
 	TargetInfo returnData = { 0, 0 };
 
