@@ -24,7 +24,6 @@ auto registerAttackSystem = [&]() {
 				hlth->health -= attack[row].damage;
 				if (hlth->health <= 0) {
 					flecs::entity(world, attack[row].target).remove<Health>();
-					//ecs_delete(world.c_ptr(), ((ecs_entity_t)flecs::entity(world, attack[row].target).id()));
 				}
 				printf("%d\n", hlth->health); //warning these are pointers and they might die when we do stuff with flecs
 				//rows.entity(row).remove<Attack>(); game jam moment
@@ -34,6 +33,15 @@ auto registerAttackSystem = [&]() {
 			}
 		}
 
+	});
+
+	DieSystem_s.action([&](flecs::rows rows, flecs::column<Health> health) {
+		for (auto row : rows) {
+			flecs::entity_t id = rows.entity(row).id();
+			ecs_delete(world.c_ptr(), ((ecs_entity_t)rows.entity(row).id()));
+			Vec2 me = FindMe(id);
+			Board[me.x][me.y] = 0;
+		}
 	});
 
 	//AttackSystem_s.run(0, buf);
