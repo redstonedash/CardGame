@@ -10,6 +10,7 @@ void main() {
 #include "TimerModual.h"
 #include "CardInitModual.h"
 #include "BoardDrawModual.h"
+#include "AudioModual.h"
 	initParalax();
 	cardModel = LoadModel("resources/Card.glb");
 	registerDrawCardSystem();
@@ -18,6 +19,7 @@ void main() {
 	registerAttackSystem();
 	registerActionIOSystems();
 	registerTimerSystems();
+	registerMusicSystems();
 
 	auto HyenaAssets = LoadCardVisuals("hyena");
 	auto FireGolemAssets = LoadCardVisuals("FireGolem");
@@ -27,6 +29,13 @@ void main() {
 	StoneGolemAssets.thickness = 0.05f;
 
 	vignette = LoadTexture("resources/vignette.png");
+
+	InitAudioDevice();
+
+	music = LoadMusicStream("resources/ArmageddonMusic.ogg");
+
+	flecs::entity musicPlayer(world, "musicPlayer");
+	musicPlayer.set<MusicPlayer>({});
 
 
 	flecs::entity card1(world, "card1");
