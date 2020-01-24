@@ -22,7 +22,7 @@ auto registerDrawCardSystem = [&]() {
 				v = { data.y * (spacing*5) - (spacing) - 5.0f, 0, 1.75f }; //sorry this isn't clean 1:15
 			}
 			else {
-				v = { data.y * (spacing*5) + (spacing) - 5.0f, 0, -1.75f };
+				v = { std::abs(data.y-4) * (spacing*5) + (spacing) - 5.0f, 0, -1.75f };
 			}
 			float scale = 3;
 			SetShaderValue(parallaxBG, modelLocBG, &v, UNIFORM_VEC3);
@@ -53,7 +53,7 @@ auto registerDrawCardSystem = [&]() {
 				pos = { data.y * (spacing * 5) - (spacing) - 5.0f, 0, 1.75f };
 			}
 			else {
-				pos = { data.y * (spacing * 5) + (spacing) - 5.0f, 0, -1.75f };
+				pos = { std::abs(data.y - 4) * (spacing * 5) + (spacing) - 5.0f, 0, -1.75f };
 			}
 			Vector2 offset = GetWorldToScreen(Vector3Subtract(pos, { 0.5f, 0, -1.75f }), cam);
 			DrawText(attackField, offset.x, offset.y, 1, RED);
@@ -76,7 +76,7 @@ auto registerHighlightActionSystem = [&]() {
 			if (data.x == 0) {
 				pos = { data.y * (spacing * 5) - spacing - 5.0f, -100.f, 1.75f };
 			} else {
-				pos = { data.y * (spacing * 5) + spacing - 5.0f, -100.f, -1.75f };
+				pos = { std::abs(data.y - 4)* (spacing * 5) + spacing - 5.0f, -100.f, -1.75f };
 			}
 			DrawCube(pos, 2.f, 0.1f, 3.5f, YELLOW);
 		}
