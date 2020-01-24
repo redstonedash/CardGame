@@ -18,18 +18,22 @@ auto registerActionIOSystems = [&]() {
 
 				//player input
 				if (info.leftTarget != 0 || info.rightTarget != 0) {
-					printf("Choose Target: L/R");
-					std::cin >> target;
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+						target = 'l';
+					}
+					else if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
+						target = 'r';
+					}
+					else {
+						target = 'x';
+					}
 				}
 
 				//input validation
-				if (target == 0 || target == 'l' || target == 'L' || target == 'r' || target == 'R') {
+				if (target == 0 || target == 'l' || target == 'r') {
 					//add attack
-					rows.entity(row).set<Attack>({ (target == 'r' || target == 'R') ? (info.rightTarget) : (info.leftTarget), card->damage});
+					rows.entity(row).set<Attack>({ (target == 'r') ? (info.rightTarget) : (info.leftTarget), card->damage});
 					//AttackSystem_s.run();
-				}
-				else {
-					printf("Invalid Entry");
 				}
 			}
 		
