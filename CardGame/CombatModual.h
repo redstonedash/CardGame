@@ -8,8 +8,10 @@ flecs::component<Health> Health_c(world, "Health");
 ////////////////////////SYSTEMS////////////////////////
 
 flecs::system<Card, Attack> AttackSystem_s(world, "AttackSystem");
+flecs::system<Health> DieSystem_s(world, "DieSystem");
 auto registerAttackSystem = [&]() {
 	AttackSystem_s.kind(flecs::PostUpdate);
+	DieSystem_s.kind(flecs::OnRemove);//TO CARTER IMPLIMENT THIS SYSTEM, IT DO THIS ecs_delete(world.c_ptr(), ((ecs_entity_t)flecs::entity(world, attack[row].target).id()));
 	AttackSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<Attack> attack) {
 		for (auto row : rows) {
 			Attack atk = attack[row];
@@ -20,6 +22,10 @@ auto registerAttackSystem = [&]() {
 				Health * hlth = flecs::entity(world, attack[row].target).get_ptr<Health>();
 				printf("%d -> ", hlth->health);
 				hlth->health -= attack[row].damage;
+				if (hlth->health <= 0) {
+					flecs::entity(world, attack[row].target).remove<Health>();
+					//ecs_delete(world.c_ptr(), ((ecs_entity_t)flecs::entity(world, attack[row].target).id()));
+				}
 				printf("%d\n", hlth->health); //warning these are pointers and they might die when we do stuff with flecs
 				//rows.entity(row).remove<Attack>(); game jam moment
 				//rows.entity(row).remove<ActionToken>(); //1:59 just keeping track of time, that way tommarow i can just look at the latest stuff and it will probably need review first
@@ -27,7 +33,9 @@ auto registerAttackSystem = [&]() {
 				rows.entity(row).set<Timer>({ card[row].BAT });
 			}
 		}
+
 	});
+
 	//AttackSystem_s.run(0, buf);
 	//byte buf[sizeof(flecs::entity_t) + sizeof(flecs::entity_t)];
 	//
