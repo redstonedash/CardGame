@@ -13,27 +13,23 @@ auto registerActionIOSystems = [&]() {
 				TargetInfo info = TargetsExist(rows.entity(row).id());
 				char target = 0;
 				bool oktogo = false;
-				while (!oktogo)
-				{
-					printf("%"  PRId64 "'s turn", rows.entity(row).id());
-					//display board
+				printf("%"  PRId64 "'s turn", rows.entity(row).id());
+				//display board
 
-					//player input
-					if (info.leftTarget != 0 || info.rightTarget != 0) {
-						printf("Choose Target: L/R");
-						std::cin >> target;
-					}
+				//player input
+				if (info.leftTarget != 0 || info.rightTarget != 0) {
+					printf("Choose Target: L/R");
+					std::cin >> target;
+				}
 
-					//input validation
-					if (target == 0 || target == 'l' || target == 'L' || target == 'r' || target == 'R') {
-						//add attack
-						rows.entity(row).set<Attack>({ (target == 'r' || target == 'R') ? (info.rightTarget) : (info.leftTarget), card->damage});
-						//AttackSystem_s.run();
-						oktogo = true; //why not just break?
-					}
-					else {
-						printf("Invalid Entry");
-					}
+				//input validation
+				if (target == 0 || target == 'l' || target == 'L' || target == 'r' || target == 'R') {
+					//add attack
+					rows.entity(row).set<Attack>({ (target == 'r' || target == 'R') ? (info.rightTarget) : (info.leftTarget), card->damage});
+					//AttackSystem_s.run();
+				}
+				else {
+					printf("Invalid Entry");
 				}
 			}
 		
