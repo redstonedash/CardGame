@@ -7,6 +7,13 @@
 #include "flecs/flecs.hpp"
 #include "raymath.h"
 #include <inttypes.h>
+
+//Models
+Model cardModel;
+
+
+//End
+
 template<typename T> T* addrOf(T&& v) { return &v; }
 #undef ecs_set
 
@@ -104,10 +111,11 @@ flecs::entity_t Board[2][5];
 auto FindMe = [&](flecs::entity_t id) -> Vec2 {
 	int i = 0;
 	int j = 0;
-	for (; id != Board[i][j]; j++) {
+	while (id != Board[i][j]) {
+		j++;
 		if (j >= 5) {
+			i++;
 			j = 0;
-			i = 1;
 		}
 	}
 	return { i, j };
