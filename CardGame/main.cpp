@@ -53,6 +53,11 @@ void main() {
 	addCardToBoard({ 1,2 }, card8.id());
 	addCardToBoard({ 1,3 }, card9.id());
 	addCardToBoard({ 1,4 }, card10.id());
+	BeginDrawing();
+	BeginMode3D(cam);
+	TimerSystem_s.run(0);
+	EndMode3D();
+	EndDrawing();
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(GRAY);
