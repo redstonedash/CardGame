@@ -18,7 +18,9 @@ void main() {
 	registerTimerSystems();
 	
 	auto HyenaAssets = LoadCardVisuals("hyena");
+	auto FireGolemAssets = LoadCardVisuals("FireGolem");
 	HyenaAssets.thickness = 0.05f;
+	FireGolemAssets.thickness = 0.05f;
 
 	flecs::entity card1(world, "card1");
 	card1.set<Card>({ 1, 2, 3, 4 }).set(HyenaAssets);
@@ -26,7 +28,7 @@ void main() {
 	flecs::entity card2(world, "card2");
 	card2.set<Card>({5, 6, 7, 8 }).set(HyenaAssets);
 	flecs::entity card3(world, "card3");
-	card3.set<Card>({5, 6, 7, 8 }).set(HyenaAssets);
+	card3.set<Card>({5, 6, 7, 8 }).set(FireGolemAssets);
 	flecs::entity card4(world, "card4");
 	card4.set<Card>({5, 6, 7, 8 }).set(HyenaAssets);
 	flecs::entity card5(world, "card5");
