@@ -6,7 +6,7 @@ flecs::component<CardVisuals> CardVisuals_c(world, "CardVisuals");
 ////////////////////////SYSTEMS////////////////////////
 flecs::system<Card, CardVisuals> DrawCardSystem_s(world, "DrawCardSystem");
 flecs::system<Card> DrawCardInfoSystem_s(world, "DrawCardInfoSystem");
-flecs::system<Card, ActionToken> HighlightActionSystem_s(world, "HightlightActionSystem");
+//flecs::system<Card, ActionToken> HighlightActionSystem_s(world, "HightlightActionSystem");
 
 auto registerDrawCardSystem = [&]() {
 	DrawCardSystem_s.kind(flecs::OnStore);
@@ -60,27 +60,27 @@ auto registerDrawCardSystem = [&]() {
 			offset = GetWorldToScreen(Vector3Subtract(pos, { -0.5f, 0, -1.75f }), cam);
 			DrawText(healthField, offset.x, offset.y, 1, GREEN);
 			offset = GetWorldToScreen(Vector3Subtract(pos, { -0.5f, 0, -1.75f }), cam);
-			Vector2 offset2 = GetWorldToScreen(Vector3Subtract(pos, { 0.5f, 0, -2.0f }), cam); //TODO DRAW TIMER
-			DrawRectangle(offset.x, offset.y,offset2.x- offset.x, offset2.y- offset.y, WHITE);
+			Vector2 offset2 = GetWorldToScreen(Vector3Subtract(pos, { 0.5f, 0, -1.75f }), cam); //TODO DRAW TIMER
+			DrawLine(offset.x, offset.y,offset2.x- offset.x, offset2.y- offset.y, WHITE);
 		}
 	});
 };
 
-auto registerHighlightActionSystem = [&]() {
-	HighlightActionSystem_s.kind(flecs::OnStore);
-	HighlightActionSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<ActionToken> actionToken) {
-		for (auto row : rows) {
-			Vec2 data = FindMe(rows.entity(row).id());
-			Vector3 pos = { 0, 0, 0 };
-			float spacing = 0.5f;
-			if (data.x == 0) {
-				pos = { data.y * (spacing * 5) - spacing - 5.0f, -100.f, 1.75f };
-			} else {
-				pos = { std::abs(data.y - 4)* (spacing * 5) + spacing - 5.0f, -100.f, -1.75f };
-			}
-			DrawCube(pos, 2.f, 0.1f, 3.5f, YELLOW);
-		}
-
-	});
-};
-////////////////////////ENTITIES////////////////////////
+//auto registerHighlightActionSystem = [&]() { since action tokens no longer exist this should porbably be elevated to a function
+//	HighlightActionSystem_s.kind(flecs::OnStore);
+//	HighlightActionSystem_s.action([&](flecs::rows rows, flecs::column<Card> card, flecs::column<ActionToken> actionToken) {
+//		for (auto row : rows) {
+//			Vec2 data = FindMe(rows.entity(row).id());
+//			Vector3 pos = { 0, 0, 0 };
+//			float spacing = 0.5f;
+//			if (data.x == 0) {
+//				pos = { data.y * (spacing * 5) - spacing - 5.0f, -100.f, 1.75f };
+//			} else {
+//				pos = { std::abs(data.y - 4)* (spacing * 5) + spacing - 5.0f, -100.f, -1.75f };
+//			}
+//			DrawCube(pos, 2.f, 0.1f, 3.5f, YELLOW);
+//		}
+//
+//	});
+//};
+//////////////////////////ENTITIES////////////////////////

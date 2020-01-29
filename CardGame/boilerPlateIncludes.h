@@ -18,8 +18,6 @@ Texture vignette;
 //Sounds
 Music music;
 
-//End
-
 template<typename T> T* addrOf(T&& v) { return &v; }
 #undef ecs_set
 
@@ -34,13 +32,9 @@ _declspec(selectany) flecs::world world = flecs::world();
 _declspec(selectany) struct Card { //all values are base values
 	int damage;
 	int HP;
-	int cost;
-	int BAT; //base attack time
-	int summonSickness;
-};
-
-_declspec(selectany) struct Side {
-	bool isP1;
+	float cost;
+	float BAT; //base attack time
+	float summonSickness;
 };
 
 _declspec(selectany) struct TargetInfo {
@@ -48,11 +42,8 @@ _declspec(selectany) struct TargetInfo {
 	flecs::entity_t rightTarget;
 };
 
-struct ActionToken {
-};
-
 struct Timer {
-	int time;
+	float time;
 };
 
 Vector2 GetWorldToTexture(Vector3 position, Camera camera, int screenWidth, int screenHeight)
@@ -102,7 +93,9 @@ struct Health {
 
 struct Attack {
 	flecs::entity_t target;
+	flecs::entity_t attacker;
 	int damage;
+
 };
 
 struct Vec2 {
@@ -110,64 +103,50 @@ struct Vec2 {
 	int y;
 };
 
-flecs::entity HandP1[10];
+flecs::entity HandP1[10]; // in the future theses should not store cards directly
 flecs::entity HandP2[10];
 flecs::entity_t Board[2][5];
 
 auto FindMe = [&](flecs::entity_t id) -> Vec2 {
-	if (id == 0) {
-		return { -1, -1 };
-	}
-	int i = 0;
-	int j = 0;
-	while (id != Board[i][j]) {
-		j++;
-		if (j >= 5) {
-			i++;
-			j = 0;
+	for (int i = 0; i < 5; i++) {
+		if (Board[0][i] == id) {
+			return { 0,i };
+		}
+		if (Board[1][i] == id) {
+			return { 1,i };
 		}
 	}
-	return { i, j };
+	return { -1, -1 }; //TODO add a check at every reference to this function
 };
 
-auto TargetsExist = [&](flecs::entity_t id) -> TargetInfo {
-	Vec2 data = FindMe(id);
-	if (data.x == -1 && data.y == -1) {
-		return { 0, 0 };
+auto GetTargets = [&](flecs::entity_t id) -> TargetInfo { // in the future the board should also contain entity references to left and right
+	Vec2 pos = FindMe(id);
+	if (pos.y == 0) {
+		return { 0, Board[!pos.x][4 - pos.y] };
+	} else {
+		assert(flecs::entity(world, Board[!pos.x][4 - pos.y]).get_ptr<Health>());
+		assert(flecs::entity(world, Board[!pos.x][5 - pos.y]).get_ptr<Health>());
+		return { Board[!pos.x][5 - pos.y], Board[!pos.x][4 - pos.y] };
 	}
-	bool isP1 = false, isEdge = false;
-	TargetInfo returnData = { 0, 0 };
-
-	if (data.x == 0) isP1 = true;
-	if (data.y == 0) isEdge = true;
-
-	if (isP1) {
-		if (isEdge) {
-			returnData.leftTarget = 0;
-		}
-		returnData.rightTarget = Board[1][5 - data.y - 1];
-	}
-	else {
-		if (isEdge) {
-			returnData.rightTarget = 0;
-		}
-		returnData.leftTarget = Board[0][5 - data.y - 1];
-	}
-	return returnData;
 };
 
-int addCardToBoard(Vec2 v, flecs::entity_t card) {
+bool addCardToBoard(Vec2 v, flecs::entity_t card) {
 	if (Board[v.x][v.y] != 0) {
-		return -1;
+		return false;
 	}
-	else {
-		Board[v.x][v.y] = card;
-	}
+	Board[v.x][v.y] = card;
+	return true;
 }
 struct CardVisuals {
 	float thickness; //the scale that the heighmap should be scaled by
 	Material foreground;
 	Material background;
+};
+
+struct Event {
+	float timeElapsed;
+	int framesElapsed;
+	void (*eventFunction)(float, int);
 };
 
 Shader parallaxBG	;
@@ -179,8 +158,6 @@ int thicknessLocFG  ;
 int scaleLocBG		;
 int scaleLocFG		;
 
-flecs::entity_t gameJamMoment;
-
 void initParalax() {
 	parallaxBG = LoadShader("resources/parallax.vert", "resources/parallaxBG.frag");
 	parallaxFG = LoadShader("resources/parallax.vert", "resources/parallaxFG.frag");
@@ -190,10 +167,6 @@ void initParalax() {
 	thicknessLocFG = GetShaderLocation(parallaxFG, "thickness");
 	scaleLocBG = GetShaderLocation(parallaxBG, "scale");
 	scaleLocFG = GetShaderLocation(parallaxFG, "scale");
-}
-
-void WinGameJam() {
-	DrawCube({ 0, 0, 0 }, 100, 1, 100, BLUE);
 }
 
 CardVisuals LoadCardVisuals(const char* cardName) {

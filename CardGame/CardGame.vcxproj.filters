@@ -29,19 +29,16 @@
     <ClInclude Include="CombatModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserIoModual.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TimerModual.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BoardDrawModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CardInitModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AudioModual.h">
+    <ClInclude Include="noECSEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnHandlerModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
