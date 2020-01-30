@@ -6,7 +6,8 @@ void main() {
 	SetTargetFPS(60);
 	flecs::entity Face0_e = flecs::entity(world, "Face0").add<Health>();//.add<Hand>();
 	flecs::entity Face1_e = flecs::entity(world, "Face1").add<Health>();//.add<Hand>();
-	
+	ECS_IMPORT(world.c_ptr(), FlecsSystemsConsole, 0);
+	ecs_set(world.c_ptr(), 0, EcsConsole, { 0 });
 #include "CombatModual.h"
 #include "BoardModual.h"
 #include "TurnHandlerModual.h"

@@ -1,6 +1,7 @@
 #pragma once
+#define FLECS_SYSTEMS_CONSOLE_H
+#include "flecs_systems_console.h"
 #include <iostream>
-#include <cmath>
 #include <string>
 #include "raylib.h"
 #include "rlgl.h"
@@ -124,8 +125,8 @@ auto GetTargets = [&](flecs::entity_t id) -> TargetInfo { // in the future the b
 	if (pos.y == 0) {
 		return { 0, Board[!pos.x][4 - pos.y] };
 	} else {
-		assert(flecs::entity(world, Board[!pos.x][4 - pos.y]).get_ptr<Health>());
-		assert(flecs::entity(world, Board[!pos.x][5 - pos.y]).get_ptr<Health>());
+		//assert(flecs::entity(world, Board[!pos.x][4 - pos.y]).get_ptr<Health>());
+		//assert(flecs::entity(world, Board[!pos.x][5 - pos.y]).get_ptr<Health>());
 		return { Board[!pos.x][5 - pos.y], Board[!pos.x][4 - pos.y] };
 	}
 };
