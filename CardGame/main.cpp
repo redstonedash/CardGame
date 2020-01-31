@@ -1,18 +1,48 @@
-
+#include <thread>
+#include <mutex>
+void lock(ecs_os_mutex_t mutex) {
+	((std::mutex*)mutex)->lock();
+}
+ecs_os_mutex_t newMutex() {
+	std::mutex* mutex = new std::mutex;
+	return (uintptr_t)mutex;
+}
+void mutexFree(ecs_os_mutex_t mutex) {
+	delete(((std::mutex*)mutex));
+}
+void unlock(ecs_os_mutex_t mutex) {
+	((std::mutex*)mutex)->unlock();
+}
+ecs_os_thread_t newThread(ecs_os_thread_callback_t callback,
+	void *param) {
+	std::thread * thread = new std::thread(callback, param);
+	return (ecs_os_thread_t)param;
+}
 void main() {
 	Camera cam = { {0,1,0}, {0,0,0}, {0,0,-1}, 10, CAMERA_ORTHOGRAPHIC };
 	InitWindow(1280, 720, "Armageddon");
 	world.set_target_fps(60);
+	ecs_os_set_api_defaults();
+	ecs_os_api_t os_api = ecs_os_api;
+	
+	ecs_os_api.mutex_lock = lock;
+	ecs_os_api.mutex_new = newMutex;
+	ecs_os_api.mutex_free = mutexFree;
+	ecs_os_api.mutex_unlock = unlock;
+	ecs_os_api.thread_new = newThread;
+	ECS_IMPORT(world.c_ptr(), FlecsSystemsConsole, 0);
+	ecs_set(world.c_ptr(), 0, EcsConsole, { 0 });
 	SetTargetFPS(60);
 	flecs::entity Face0_e = flecs::entity(world, "Face0").add<Health>();//.add<Hand>();
 	flecs::entity Face1_e = flecs::entity(world, "Face1").add<Health>();//.add<Hand>();
-	ECS_IMPORT(world.c_ptr(), FlecsSystemsConsole, 0);
-	ecs_set(world.c_ptr(), 0, EcsConsole, { 0 });
+	//ECS_IMPORT(world.c_ptr(), FlecsSystemsConsole, 0);
+	//ecs_set(world.c_ptr(), 0, EcsConsole, { 0 });
 #include "CombatModual.h"
 #include "BoardModual.h"
 #include "TurnHandlerModual.h"
 #include "CardInitModual.h"
 #include "BoardDrawModual.h"
+#include "flecs_systems_console.h"
 	initParalax();
 	cardModel = LoadModel("resources/Card.glb");
 	registerDrawCardSystem();

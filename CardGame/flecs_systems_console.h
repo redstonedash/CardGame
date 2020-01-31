@@ -1,5 +1,4 @@
-#ifndef FLECS_SYSTEMS_CONSOLE_H
-#define FLECS_SYSTEMS_CONSOLE_H
+#pragma once
 #include "flecs.h"
 #ifdef __cplusplus
 extern "C" {
@@ -24,6 +23,4 @@ void FlecsSystemsConsoleImport(
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif

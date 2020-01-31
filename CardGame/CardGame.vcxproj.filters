@@ -41,5 +41,11 @@
     <ClInclude Include="TurnHandlerModual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flecs_systems_console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
